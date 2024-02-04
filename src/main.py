@@ -19,7 +19,7 @@ def main():
             st.image(uploaded_file)
 
         draw = ImageDraw.Draw(image)
-        myFont = ImageFont.truetype("C:/Windows/Fonts/ariblk.ttf", 20)
+        myFont = ImageFont.truetype("C:/Windows/Fonts/ariblk.ttf", 30)
         inputs = processor(images=image, return_tensors="pt")
         outputs = model(**inputs)
         target_sizes = torch.tensor([image.size[::-1]])
@@ -35,8 +35,8 @@ def main():
                     f"Detected {model.config.id2label[label.item()]} with confidence "
                     f"{round(score.item(), 3)} at location {box}"
             )
-            draw.rectangle(box, outline = "red", width = 2)
-            draw.text((box[0], box[1]), model.config.id2label[label.item()], font=myFont)
+            draw.rectangle(box, outline = "red", width = 4)
+            draw.text((box[0], box[1]), model.config.id2label[label.item()], font=myFont, fill ='black')
         with col2:
             st.image(image)
 
